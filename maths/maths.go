@@ -30,12 +30,14 @@ func Mod(num1, num2 int) (int, error) {
 	return num1 % num2, nil
 }
 //不定个数参数运算
-func SumAllInt(args ...int)int{
-	var sum int
+func SumAllInt(args ...int)(int,int){
+	var sum  = 0
+	var count  = 0
 	for _,value := range args{
 		sum += value
+		count++
 	}
-	return sum
+	return sum,count
 }
 //参数为slice
 func SumSliceInt(args []int)(int,int){
