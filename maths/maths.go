@@ -3,18 +3,20 @@ package maths
 import (
 	"errors"
 )
+
 //加法
 func Add(num1, num2 int) (int, error) {
 	return num1 + num2, nil
 }
+
 //减法
 func Sub(num1, num2 int) (int, error) {
-	return num1 + num2, nil
+	return num1 - num2, nil
 }
 
 //乘法
 func Mutil(num1, num2 float32) (float32, error) {
-	return num1 + num2, nil
+	return num1 * num2, nil
 }
 
 //乘法
@@ -29,23 +31,25 @@ func Div(num1, num2 float32) (float32, error) {
 func Mod(num1, num2 int) (int, error) {
 	return num1 % num2, nil
 }
+
 //不定个数参数运算
-func SumAllInt(args ...int)(int,int){
-	var sum  = 0
-	var count  = 0
-	for _,value := range args{
-		sum += value
-		count++
-	}
-	return sum,count
-}
-//参数为slice
-func SumSliceInt(args []int)(int,int){
-	var sum  = 0
+func SumAllInt(args ...int) (int, int) {
+	var sum = 0
 	var count = 0
-	for _,value :=range args{
+	for _, value := range args {
 		sum += value
 		count++
 	}
-	return sum,count
+	return sum, count
+}
+
+//参数为slice
+func SumSliceInt(args []int) (int, int) {
+	var sum = 0
+	var count = 0
+	for _, value := range args {
+		sum += value
+		count++
+	}
+	return sum, count
 }
