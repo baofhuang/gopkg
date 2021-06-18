@@ -19,7 +19,7 @@ func Multi(num1, num2 float32) (float32, error) {
 	return num1 * num2, nil
 }
 
-//乘法
+//除法
 func Div(num1, num2 float32) (float32, error) {
 	if num2 == 0 {
 		return 0, errors.New("被除数为0！")
