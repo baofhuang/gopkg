@@ -15,7 +15,7 @@ func Sub(num1, num2 int) (int, error) {
 }
 
 //乘法
-func Mutil(num1, num2 float32) (float32, error) {
+func Multi(num1, num2 float32) (float32, error) {
 	return num1 * num2, nil
 }
 
@@ -30,6 +30,22 @@ func Div(num1, num2 float32) (float32, error) {
 //模运算
 func Mod(num1, num2 int) (int, error) {
 	return num1 % num2, nil
+}
+
+//指数运算
+func Power(base float32, exponent int) (float32, error) {
+	var sum = base
+	if exponent < 0 {
+		for exponent++; exponent < 0; exponent++ {
+			sum *= base
+		}
+		sum = 1.0 / sum
+	} else {
+		for exponent--; exponent > 0; exponent-- {
+			sum *= base
+		}
+	}
+	return sum, nil
 }
 
 //不定个数参数运算

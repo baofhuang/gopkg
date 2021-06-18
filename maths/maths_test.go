@@ -30,12 +30,12 @@ func Test_Sub(t *testing.T) {
 }
 
 //乘法
-func Test_Mutil(t *testing.T) {
+func Test_Multi(t *testing.T) {
 	var (
 		expected float32
 		actual   float32
 	)
-	actual, _ = Mutil(1, 2)
+	actual, _ = Multi(1, 2)
 	expected = 2
 	if actual != expected {
 		t.Errorf("Message:expected:%v\tactual:%v", expected, actual)
@@ -65,6 +65,20 @@ func Test_Mod(t *testing.T) {
 	expected = 1
 	if actual != expected {
 		t.Errorf("Message:expected:%d\tactual:%d", expected, actual)
+	}
+}
+
+//指数运算
+func Test_Power(t *testing.T) {
+	var (
+		expected float32
+		actual   float32
+	)
+	actual, _ = Power(2, -2)
+	expected = 0.25
+
+	if actual != expected {
+		t.Errorf("Message:expected:%f\tactual:%f", expected, actual)
 	}
 }
 
