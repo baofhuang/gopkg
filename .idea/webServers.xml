@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4d58df1c-c4ce-4994-817f-97d441ff7324" name="dev" url="http://9.135.155.71">
+        <fileTransfer rootFolder="/home/marcelhuang/gopkg" accessType="SFTP" host="9.135.155.71" port="36000" sshConfigId="2b02cab9-7269-4698-9dd9-994b3c3780a6" sshConfig="root@9.135.155.71:36000 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
