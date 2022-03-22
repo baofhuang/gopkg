@@ -3,7 +3,14 @@ package http
 import "net/http"
 
 func StartClient(url string) (*http.Response, error) {
-	rsp, err := http.Get(url)
+	client := &http.Client{}
+	request, err := http.NewRequest(http.MethodGet, url, nil)
+	if err != nil {
+		return nil, err
+	}
+	// request.Header.Set("Host", "specific-host")
+	request.Host = "specific-host"
+	rsp, err := client.Do(request)
 	if err != nil {
 		return nil, err
 	}

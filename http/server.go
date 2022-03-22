@@ -14,7 +14,7 @@ func StartServer(addr string) error {
 }
 
 func SayHello(rsp http.ResponseWriter, req *http.Request) {
-	fmt.Println("get request from ", req.Host)
+	fmt.Printf("get request %s to %s \n", req.RemoteAddr, req.Host)
 	// response
 	rsp.WriteHeader(200)
 	if _, err := rsp.Write([]byte("request received")); err != nil {
