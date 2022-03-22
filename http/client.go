@@ -2,7 +2,7 @@ package http
 
 import "net/http"
 
-func StartClient(url string) (*http.Response, error) {
+func DoRequest(url string) (*http.Response, error) {
 	client := &http.Client{}
 	request, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
