@@ -1,4 +1,4 @@
-package main
+package lsaram
 
 import (
 	"log"
@@ -8,6 +8,18 @@ import (
 
 	"github.com/Shopify/sarama"
 )
+
+// NewProducer 实例化生产者
+func NewProducer(host string) (sarama.AsyncProducer, error) {
+	config := sarama.NewConfig()            // 实例化一个带默认配置的config
+	config.Producer.Return.Successes = true // 开启生产消息响应
+	config.Producer.Return.Errors = true
+	producer, err := sarama.NewAsyncProducer([]string{host}, config)
+	if err != nil {
+		return nil, err
+	}
+	return producer, nil
+}
 
 // Produce 开始生产
 func Produce(producer sarama.AsyncProducer, topic string) {
@@ -38,7 +50,7 @@ ProducerLoop:
 	for {
 		message := &sarama.ProducerMessage{
 			Topic: topic,
-			Value: sarama.StringEncoder("testing 123"),
+			Value: sarama.StringEncoder("mcTest"),
 		}
 		select {
 		case producer.Input() <- message:
@@ -50,5 +62,5 @@ ProducerLoop:
 		}
 	}
 	wg.Wait()
-	log.Printf("Successfully produced: %d; errors: %d\n", successes, producerErrors)
+	log.Printf("Successfully produced: %d; errors: %d\n", enqueued, producerErrors)
 }
