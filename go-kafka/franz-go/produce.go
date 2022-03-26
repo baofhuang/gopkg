@@ -4,7 +4,7 @@ import (
 	"context"
 	"os"
 	"os/signal"
-
+	
 	"github.com/twmb/franz-go/pkg/kgo"
 )
 
@@ -25,18 +25,16 @@ func Produce(producer *kgo.Client, topic string) {
 	// Trap SIGINT to trigger a graceful shutdown.
 	signals := make(chan os.Signal, 1)
 	signal.Notify(signals, os.Interrupt)
-	var con = make(chan kgo.Record, 1)
+	var con = make(chan kgo.Record)
 
 ProducerLoop:
 	for i := 0; i < 1000; i++ {
-		record := kgo.Record{
+		con <- kgo.Record{
 			Topic: topic,
 			Value: []byte("mcTest"),
 		}
-		con <- record
-
 		select {
-		case <-con:
+		case record := <-con:
 			producer.Produce(context.Background(), &record, func(record *kgo.Record, err error) {})
 		case <-signals:
 			producer.Close() // Trigger a shutdown of the producer.
