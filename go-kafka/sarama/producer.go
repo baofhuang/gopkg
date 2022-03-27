@@ -5,14 +5,15 @@ import (
 	"os"
 	"os/signal"
 	"sync"
-
+	
 	"github.com/Shopify/sarama"
 )
 
 // NewProducer 实例化生产者
 func NewProducer(host string) (sarama.AsyncProducer, error) {
-	config := sarama.NewConfig()            // 实例化一个带默认配置的config
-	config.Producer.Return.Successes = true // 开启生产消息响应
+	config := sarama.NewConfig()                     // 实例化一个带默认配置的config
+	config.Producer.RequiredAcks = sarama.WaitForAll // 发送完数据需要leader和follow都确认
+	config.Producer.Return.Successes = true          // 开启生产消息响应
 	config.Producer.Return.Errors = true
 	producer, err := sarama.NewAsyncProducer([]string{host}, config)
 	if err != nil {
@@ -55,7 +56,7 @@ ProducerLoop:
 		select {
 		case producer.Input() <- message:
 			enqueued++
-
+		
 		case <-signals:
 			producer.AsyncClose() // Trigger a shutdown of the producer.
 			break ProducerLoop
