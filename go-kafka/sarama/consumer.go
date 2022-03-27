@@ -7,7 +7,7 @@ import (
 )
 
 // NewConsumer 实例化消费者
-func NewConsumer(host string, topic string) (sarama.Consumer, error) {
+func NewConsumer(host string) (sarama.Consumer, error) {
 	config := sarama.NewConfig()            // 实例化一个带默认配置的config
 	config.Producer.Return.Successes = true // 开启生产消息响应
 	config.Producer.Return.Errors = true

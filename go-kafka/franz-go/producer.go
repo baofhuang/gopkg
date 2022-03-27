@@ -35,6 +35,7 @@ ProducerLoop:
 		}
 		select {
 		case record := <-con:
+			// 支持Produce 和 ProduceSync
 			producer.Produce(context.Background(), &record, func(record *kgo.Record, err error) {})
 		case <-signals:
 			producer.Close() // Trigger a shutdown of the producer.
