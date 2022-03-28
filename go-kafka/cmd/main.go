@@ -6,10 +6,11 @@ import (
 	"time"
 
 	// kafka "github.com/baofuhuang/gopkg/kafka/sarama"
-	kafka "github.com/baofuhuang/gopkg/kafka/franz-go"
+	// kafka "github.com/baofuhuang/gopkg/kafka/franz-go"
+	kafka "github.com/baofuhuang/gopkg/kafka/confluent-kafka-go"
 )
 
-var host = flag.String("host", "localhost:9092", "kafka host")
+var host = flag.String("host", "9.135.155.71:9092", "kafka host")
 var topic = flag.String("topic", "what_topic", "topic")
 
 func main() {
@@ -30,7 +31,6 @@ func main() {
 	go kafka.Consume(consumer, *topic)
 	// 生产数据
 	go kafka.Produce(producer, *topic)
-	
 
 	time.Sleep(time.Hour)
 }

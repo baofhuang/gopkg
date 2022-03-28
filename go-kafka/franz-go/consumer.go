@@ -28,7 +28,6 @@ func NewConsumer(host string) (*kgo.Client, error) {
 func Consume(consumer *kgo.Client, topic string) error {
 	consumer.AddConsumeTopics(topic) // v1.4.0 中添加的新特性;
 	// 不能开启正则匹配；且消费者组或者直接消费不能同时为空
-	fmt.Println(topic)
 	for {
 		fetches := consumer.PollFetches(context.TODO())
 		if fetches.IsClientClosed() {
